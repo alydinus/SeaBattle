@@ -13,7 +13,6 @@ public class Main {
         //SHIP 1X3
         int x1 = (int) Math.floor(Math.random() * 5);
         int y1 = (int) Math.floor(Math.random() * 5);
-        System.out.println(x1 + " " + y1);
         for (int i = 0; i < 3; i++) {
             if (x1 >= y1) {
                 matrix[x1 + i][y1] = s;
@@ -46,22 +45,91 @@ public class Main {
         }
 
 
-        //SHIP 1x2
-        int x2 = (int) Math.floor(Math.random() * 6);
-        int y2 = (int) Math.floor(Math.random() * 6);
-        for (int i = 0; i < 2; i++){
-            if (x2>=y2) {
-                if (matrix1[x2 + i][y2] == 1 || matrix1[x2 + i][y2] == 2) {
-                    matrix1[x2 + i][y2] = 1;
-                }
+
+        //SHIPS 1x1
+        int temp = 0;
+//        int x2 = (int) Math.floor(Math.random() * 6);
+//        int y2 = (int) Math.floor(Math.random() * 6);
+//        System.out.println(x2 + " " + y2);
+
+
+        while(temp!=2){
+            int x2 = (int) Math.floor(Math.random() * 6);
+            int y2 = (int) Math.floor(Math.random() * 6);
+            if(matrix1[x2][y2] != 0){
+//                System.out.println(x2 + " 1 " + y2);
+                continue;
             }
-            else{
-                if (matrix1[x2][y2 + i] == 1 || matrix1[x2][y2 + i] == 2) {
-                    matrix1[x2 ][y2 + i] = 1;
+//            System.out.println(x2 + " 2 " + y2);
+            if (x2>=y2) {
+                for (int i = 0; i < 2; i++) {
+                    try {
+                        if (matrix1[x2 + i][y2] == 0) {
+                            matrix1[x2 + i][y2] = 1;
+                        }
+                    }catch (ArrayIndexOutOfBoundsException e){
+
+                    }
+                }
+            }else{
+                for (int i = 0; i < 2; i++) {
+                    try {
+                        if (matrix1[x2][y2 + i] == 0) {
+                            matrix1[x2][y2 + i] = 1;
+                        }
+                    }catch (ArrayIndexOutOfBoundsException e){
+
+                    }
                 }
 
             }
+            temp++;
+
+
         }
+//        //SHIPS 1x2
+//        int x2 = (int) Math.floor(Math.random() * 6);
+//        System.out.println(x2);
+//        int y2 = (int) Math.floor(Math.random() * 6);
+//        for (int i = 0; i < 2; i++){
+//            if (x2>=y2) {
+//                if (matrix1[x2 + i][y2 + i] ==0){
+//                    matrix1[x2 + i][y2] = 1;
+//                }else {
+//                    if
+//                }
+//            }
+//            else{
+//                if (matrix1[x2 + i][y2 + i] ==0){
+//                matrix1[x2 ][y2 + i] = 1;
+//            }
+//
+//
+//
+//            }
+//        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < 7; j++) {
