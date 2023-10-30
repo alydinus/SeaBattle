@@ -1,5 +1,10 @@
+import java.sql.SQLOutput;
+import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("What is your name?");
+        String name = scanner.nextLine();
         String[][] matrix = new String[7][7];
         Integer[][] matrix1 = new Integer[7][7];
         String s = "* ";
@@ -42,8 +47,6 @@ public class Main {
                 }
             }
         }
-
-
         //SHIPS 1x2
         int temp = 0;
         while (temp != 2) {
@@ -104,7 +107,6 @@ public class Main {
             if (matrix1[x3][y3] != 0) {
                 continue;
             }
-            System.out.println(x3 + " " + y3);
             matrix[x3][y3] = s;
             for (int i = 0; i < 3; i++) {
                 try {
@@ -127,11 +129,11 @@ public class Main {
             System.out.println();
         }
         System.out.println();
-        for (int i = 0; i < 7; i++) {
-            for (int j = 0; j < 7; j++) {
-                System.out.print(matrix1[i][j]);
-            }
-            System.out.println();
-        }
+//        for (int i = 0; i < 7; i++) {
+//            for (int j = 0; j < 7; j++) {
+//                System.out.print(matrix1[i][j]);
+//            }
+//            System.out.println();
+//        }
     }
 }
