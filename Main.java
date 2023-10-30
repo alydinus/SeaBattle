@@ -1,4 +1,3 @@
-import java.sql.SQLOutput;
 import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
@@ -7,10 +6,10 @@ public class Main {
         String name = scanner.nextLine();
         String[][] matrix = new String[7][7];
         Integer[][] matrix1 = new Integer[7][7];
-        String s = "* ";
+        String s = "*";
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < 7; j++) {
-                matrix[i][j] = "# ";
+                matrix[i][j] = "#";
                 matrix1[i][j] = 0;
 
             }
@@ -122,13 +121,28 @@ public class Main {
         }
 
 
-        for (int i = 0; i < 7; i++) {
-            for (int j = 0; j < 7; j++) {
-                System.out.print(matrix[i][j]);
+
+
+
+        System.out.println();
+        System.out.println("Enter coordinates");
+        while (true){
+            for (int i = 0; i < 7; i++) {
+                for (int j = 0; j < 7; j++) {
+                    System.out.print(matrix[i][j] + " ");
+                }
+                System.out.println();
+            }
+            int shotx = scanner.nextInt();
+            int shoty = scanner.nextInt();
+            if (matrix1[shoty - 1][shotx -1] == 1){
+                System.out.println("Hit");
+                matrix[shoty - 1][shotx -1] = "X";
+            }else{
+                System.out.println("Miss");
             }
             System.out.println();
         }
-        System.out.println();
 //        for (int i = 0; i < 7; i++) {
 //            for (int j = 0; j < 7; j++) {
 //                System.out.print(matrix1[i][j]);
