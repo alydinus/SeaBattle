@@ -92,27 +92,27 @@ public class Main {
                         matrix1[Math.abs(x2 - 1)][y2 + i] = 9;
                         matrix1[Math.abs(x2 + 1)][y2 + i] = 9;
                     }catch (ArrayIndexOutOfBoundsException e){
-                        matrix1[x2][y2 + i] = 2;
+                        matrix1[x2][y2 + i] = 4;
                     }
                     for (int j = 0; j < 3; j++){
                         try{
                             matrix1[x2 - 1 + j][Math.abs(y2 - 1)] = 9;
                         }catch (ArrayIndexOutOfBoundsException e){
-                            matrix1[x2][y2 + i] = 2;
+                            matrix1[x2][y2 + i] = 4;
                         }
                         try{
                             matrix1[x2 - 1 + j][y2 + 2] = 9;
                         }catch (ArrayIndexOutOfBoundsException e){
-                            matrix1[x2][y2 + i] = 2;
+                            matrix1[x2][y2 + i] = 4;
                         }
                     }
-                    matrix1[x2][y2 + i] = 2;
+                    matrix1[x2][y2 + i] = 4;
                 }
 
             }
             temp++;
         }
-//        //SHIPS 1x1
+        //SHIPS 1x1
         int z = 0;
         while (z < 4) {
             int x3 = (int) Math.floor(Math.random() * 7);
@@ -140,10 +140,15 @@ public class Main {
             }
             z++;
         }
-
-        System.out.println();
+        //OUTPUT
         System.out.println("Enter coordinates");
-        while (true) {
+        System.out.println();
+        int ship3 = 0;
+        int ship21 = 0;
+        int ship22 = 0;
+        int ship1 = 0;
+        int numbofshots = 0;
+        while (ship3 != 3 && ship21 != 2 && ship22 != 2 && ship1 !=4) {
             for (int i = 0; i < 7; i++) {
                 for (int j = 0; j < 7; j++) {
                     System.out.print(matrix[i][j] + " ");
@@ -152,27 +157,53 @@ public class Main {
             }
             int shotx = scanner.nextInt();
             int shoty = scanner.nextInt();
-            if (matrix1[shoty - 1][shotx - 1] == 1) {
-                System.out.println("Hit");
+
+            if(matrix1[shoty - 1][shotx - 1] == 3){
+                ship3++;
+                if (ship3 < 3){
+                    System.out.println("Hit!");
+                    matrix[shoty - 1][shotx - 1] = "X";
+
+                }if (ship3 == 3){
+                    System.out.println("Sunk!");
+                    matrix[shoty - 1][shotx - 1] = "X";
+                }
+            }
+            if(matrix1[shoty - 1][shotx - 1] == 2){
+                ship21++;
+                if (ship21 < 2){
+                    System.out.println("Hit!");
+                    matrix[shoty - 1][shotx - 1] = "X";
+                }
+                else{
+                    System.out.println("Sunk!");
+                    matrix[shoty - 1][shotx - 1] = "X";
+                }
+            }
+            if(matrix1[shoty - 1][shotx - 1] == 4){
+                ship22++;
+                if (ship22  < 2){
+                    System.out.println("Hit!");
+                    matrix[shoty - 1][shotx - 1] = "X";
+                }else {
+                    System.out.println("Sunk!");
+                    matrix[shoty - 1][shotx - 1] = "X";
+                }
+            }
+            if(matrix1[shoty - 1][shotx - 1] == 1){
+                System.out.println("Sunk!");
                 matrix[shoty - 1][shotx - 1] = "X";
-            } else {
-                System.out.println("Miss");
+                ship1++;
+            }
+            if(matrix1[shoty - 1][shotx - 1] == 9 || matrix1[shoty - 1][shotx - 1] == 0){
+                System.out.println("Miss!");
+                matrix[shoty - 1][shotx - 1] = "x";
             }
             System.out.println();
+            numbofshots ++;
         }
-//        for (int i = 0; i < 7; i++) {
-//            for (int j = 0; j < 7; j++) {
-//                System.out.print(matrix[i][j] + " ");
-//            }
-//            System.out.println();
-//        }
-//        for (int i = 0; i < 7; i++) {
-//            for (int j = 0; j < 7; j++) {
-//                System.out.print(matrix1[i][j]);
-//            }
-//            System.out.println();
-//        }
-
-
+        if (ship3 == 3 && ship21 == 2 && ship22 == 2 && ship1 ==4){
+            System.out.println("Total number of shots:" + numbofshots);
+        }
     }
 }
