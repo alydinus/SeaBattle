@@ -1,15 +1,10 @@
-import com.sun.jdi.Value;
 
-import java.security.Key;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
+
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter your name");
-        String name = scanner.nextLine();
+
 
             //OUTPUT
         boolean flag = false;
@@ -18,82 +13,99 @@ public class Main {
         do{
             String[][] matrix = new String[7][7];
             Integer[][] matrix1 = new Integer[7][7];
+            int numbofshots = 0;
+            System.out.println("Enter your name");
+            String name = scanner.next();
+            String[] alpha = {"A","B","C","D","E","F","G"};
+
+
             System.out.println("Enter coordinates");
             System.out.println();
             ships(matrix,matrix1);
-            int numbofshots = 0;
             int ship3 = 0;
             int ship21 = 0;
             int ship22 = 0;
             int ship1 = 0;
             while (true) {
-                System.out.println("  1 2 3 4 5 6 7 ");
-                for(int i = 0; i < 7; i++){
-                    System.out.print(i+1 + " ");
-                    for(int j = 0; j<7;j++){
+                System.out.println("  A B C D E F G ");
+                for (int i = 0; i < 7; i++) {
+                    System.out.print(i + 1 + " ");
+                    for (int j = 0; j < 7; j++) {
                         System.out.print(matrix[i][j] + " ");
                     }
-                    System.out.print(i+1 + " ");
+                    System.out.print(i + 1 + " ");
                     System.out.println();
                 }
-                System.out.println("  1 2 3 4 5 6 7 ");
-                int shotx = scanner.nextInt();
+                System.out.println("  A B C D E F G ");
+                String shotx1 = scanner.next();
+                int shotx = 0;
                 int shoty = scanner.nextInt();
+                for (int j = 0; j < alpha.length; j++) {
+                    if (alpha[j].equals(shotx1)) {
+                        shotx += j + 1;
+                    }
+                }
+                if (Math.abs(shoty) > 7) {
+                    System.out.println("You can't shoot there");
+                }
+                try {
+                    if (matrix[shoty - 1][shotx - 1].equals("X") || matrix[shoty - 1][shotx - 1].equals("x")) {
+                        System.out.println("You have already shoot there!");
+                    } else {
+                        if (matrix1[shoty - 1][shotx - 1] == 3) {
+                            ship3++;
+                            if (ship3 < 3) {
+                                System.out.println("Hit!");
+                                matrix[shoty - 1][shotx - 1] = "X";
+                            }
+                            if (ship3 >= 3) {
+                                System.out.println("Sunk!");
+                                matrix[shoty - 1][shotx - 1] = "X";
+                            }
+                        }
+                        if (matrix1[shoty - 1][shotx - 1] == 2) {
+                            ship21++;
+                            if (ship21 < 2) {
+                                System.out.println("Hit!");
+                                matrix[shoty - 1][shotx - 1] = "X";
+                            }
+                            if (ship21 >= 2) {
+                                System.out.println("Sunk!");
+                                matrix[shoty - 1][shotx - 1] = "X";
+                            }
 
-                if (matrix[shoty - 1][shotx - 1].equals("X") || matrix[shoty - 1][shotx - 1].equals("x")){
-                    System.out.println("You have already shoot there!");
-                }
-                else {
-                    if (matrix1[shoty - 1][shotx - 1] == 3) {
-                        ship3++;
-                        if (ship3 < 3) {
-                            System.out.println("Hit!");
-                            matrix[shoty - 1][shotx - 1] = "X";
                         }
-                        if (ship3 >= 3) {
+                        if (matrix1[shoty - 1][shotx - 1] == 4) {
+                            ship22++;
+                            if (ship22 < 2) {
+                                System.out.println("Hit!");
+                                matrix[shoty - 1][shotx - 1] = "X";
+                            }
+                            if (ship22 >= 2) {
+                                System.out.println("Sunk!");
+                                matrix[shoty - 1][shotx - 1] = "X";
+                            }
+                        }
+                        if (matrix1[shoty - 1][shotx - 1] == 1) {
                             System.out.println("Sunk!");
                             matrix[shoty - 1][shotx - 1] = "X";
+                            ship1++;
+                        }
+                        if (matrix1[shoty - 1][shotx - 1] == 9 || matrix1[shoty - 1][shotx - 1] == 0) {
+                            System.out.println("Miss!");
+                            matrix[shoty - 1][shotx - 1] = "x";
                         }
                     }
-                    if (matrix1[shoty - 1][shotx - 1] == 2) {
-                        ship21++;
-                        if (ship21 < 2) {
-                            System.out.println("Hit!");
-                            matrix[shoty - 1][shotx - 1] = "X";
-                        }
-                        if (ship21 >= 2) {
-                            System.out.println("Sunk!");
-                            matrix[shoty - 1][shotx - 1] = "X";
-                        }
-
+                    if (ship3 >= 3 && ship21 >= 2 && ship22 >= 2 && ship1 >= 4) {
+                        break;
                     }
-                    if (matrix1[shoty - 1][shotx - 1] == 4) {
-                        ship22++;
-                        if (ship22 < 2) {
-                            System.out.println("Hit!");
-                            matrix[shoty - 1][shotx - 1] = "X";
-                        }
-                        if (ship22 >= 2) {
-                            System.out.println("Sunk!");
-                            matrix[shoty - 1][shotx - 1] = "X";
-                        }
-                    }
-                    if (matrix1[shoty - 1][shotx - 1] == 1) {
-                        System.out.println("Sunk!");
-                        matrix[shoty - 1][shotx - 1] = "X";
-                        ship1++;
-                    }
-                    if (matrix1[shoty - 1][shotx - 1] == 9 || matrix1[shoty - 1][shotx - 1] == 0) {
-                        System.out.println("Miss!");
-                        matrix[shoty - 1][shotx - 1] = "x";
-                    }
+                    System.out.println();
+                    numbofshots++;
+                }catch (ArrayIndexOutOfBoundsException e){
+                    System.out.println("You can't shoot there!");
                 }
-                if (ship3 >= 3 && ship21 >= 2 && ship22 >= 2 && ship1 >= 4) {
-                    break;
-                }
-                System.out.println();
-                numbofshots++;
             }
+            players.put(name,numbofshots);
             System.out.println("Total number of shots: " + numbofshots);
             System.out.println("Do you want to play again?");
             String answer = scanner.next();
@@ -103,6 +115,10 @@ public class Main {
                 flag = false;
             }
         }while(flag);
+        System.out.println("Player"  + "   Score");
+        players.entrySet().stream().sorted(Map.Entry.comparingByValue()).forEach(entry -> {
+            System.out.println(entry.getKey() + " " + entry.getValue());
+        });
 
 
     }
