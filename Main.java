@@ -13,21 +13,26 @@ public class Main {
         do{
             String[][] matrix = new String[7][7];
             Integer[][] matrix1 = new Integer[7][7];
-            int numbofshots = 0;
-            System.out.println("Enter your name");
-            String name = scanner.next();
             String[] alpha = {"A","B","C","D","E","F","G"};
 
-
-            System.out.println("Enter coordinates");
-            System.out.println();
-            ships(matrix,matrix1);
+            int numbofshots = 0;
             int ship3 = 0;
             int ship21 = 0;
             int ship22 = 0;
             int ship1 = 0;
+
+            System.out.println("Enter your name");
+            String name = scanner.next();
+
+
+            System.out.println("Enter coordinates");
+            System.out.println();
+
+            ships(matrix,matrix1);
+
             while (true) {
                 System.out.println("  A B C D E F G ");
+
                 for (int i = 0; i < 7; i++) {
                     System.out.print(i + 1 + " ");
                     for (int j = 0; j < 7; j++) {
@@ -37,6 +42,7 @@ public class Main {
                     System.out.println();
                 }
                 System.out.println("  A B C D E F G ");
+
                 String shotx1 = scanner.next();
                 int shotx = 0;
                 int shoty = scanner.nextInt();
@@ -46,11 +52,12 @@ public class Main {
                     }
                 }
                 if (Math.abs(shoty) > 7) {
-                    System.out.println("You can't shoot there");
+                    System.out.println("Invalid input");
                 }
+                //Shots
                 try {
                     if (matrix[shoty - 1][shotx - 1].equals("X") || matrix[shoty - 1][shotx - 1].equals("x")) {
-                        System.out.println("You have already shoot there!");
+                        System.out.println("You already shot there!");
                     } else {
                         if (matrix1[shoty - 1][shotx - 1] == 3) {
                             ship3++;
@@ -102,9 +109,10 @@ public class Main {
                     System.out.println();
                     numbofshots++;
                 }catch (ArrayIndexOutOfBoundsException e){
-                    System.out.println("You can't shoot there!");
+                    System.out.println("Invalid input");
                 }
             }
+            //Output of players
             players.put(name,numbofshots);
             System.out.println("Total number of shots: " + numbofshots);
             System.out.println("Do you want to play again?");
@@ -115,6 +123,7 @@ public class Main {
                 flag = false;
             }
         }while(flag);
+        //Output of players
         System.out.println("Player"  + "   Score");
         players.entrySet().stream().sorted(Map.Entry.comparingByValue()).forEach(entry -> {
             System.out.println(entry.getKey() + " " + entry.getValue());
@@ -122,6 +131,8 @@ public class Main {
 
 
     }
+
+    //SHIPS
     static void ships(String[][]matrix, Integer[][] matrix1){
         String s = "*";
         for (int i = 0; i < 7; i++) {
@@ -136,7 +147,6 @@ public class Main {
         int y1 = (int) Math.floor(Math.random() * 5);
         for (int i = 0; i < 3; i++) {
             if (x1 >= y1) {
-                matrix[x1 + i][y1] = s;
                 try {
                     matrix1[x1 + i][Math.abs(y1 - 1)] = 9;
                     matrix1[x1 + i][Math.abs(y1 + 1)] = 9;
@@ -148,7 +158,6 @@ public class Main {
                 }
             } else {
                 try {
-                    matrix[x1][y1 + i] = s;
                     matrix1[Math.abs(x1 - 1)][y1 + i] = 9;
                     matrix1[Math.abs(x1 + 1)][y1 + i] = 9;
                     matrix1[x1 - 1 + i][Math.abs(y1 - 1)] = 9;
@@ -174,7 +183,6 @@ public class Main {
                     continue;
                 }
                 for (int i = 0; i < 2; i++) {
-                    matrix[x2 + i][y2] = s;
                     try{
                         matrix1[x2 + i][Math.abs(y2 - 1)] = 9;
                         matrix1[x2 + i][Math.abs(y2 + 1)] = 9;
@@ -202,7 +210,6 @@ public class Main {
                     continue;
                 }
                 for (int i = 0; i < 2; i++) {
-                    matrix[x2][y2 + i] = s;
                     try {
                         matrix1[Math.abs(x2 - 1)][y2 + i] = 9;
                         matrix1[Math.abs(x2 + 1)][y2 + i] = 9;
@@ -240,7 +247,6 @@ public class Main {
                     continue;
                 }
                 for (int i = 0; i < 2; i++) {
-                    matrix[x2 + i][y2] = s;
                     try{
                         matrix1[x2 + i][Math.abs(y2 - 1)] = 9;
                         matrix1[x2 + i][Math.abs(y2 + 1)] = 9;
@@ -268,7 +274,6 @@ public class Main {
                     continue;
                 }
                 for (int i = 0; i < 2; i++) {
-                    matrix[x2][y2 + i] = s;
                     try {
                         matrix1[Math.abs(x2 - 1)][y2 + i] = 9;
                         matrix1[Math.abs(x2 + 1)][y2 + i] = 9;
@@ -301,7 +306,6 @@ public class Main {
             if (matrix1[x3][y3] != 0) {
                 continue;
             }
-            matrix[x3][y3] = s;
             for (int i = 0; i < 3; i++) {
                 try {
                     matrix1[x3 - 1 + i][y3 - 1] = 9;
